@@ -1,0 +1,8 @@
+{
+    "name": "speedreader",
+    "dependencies": {
+        "ember": "~1.4",
+        "ember-data": "~1.0.0-beta.5",
+        "bootstrap": "~v3.1.1"
+    }
+}

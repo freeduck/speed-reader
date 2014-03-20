@@ -1,0 +1,8 @@
+body {
+    font-family: 'Inconsolata', normal;
+    font-size: 18px;
+}
+
+.highlighted {
+    color: red;
+}
