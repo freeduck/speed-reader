@@ -18,9 +18,32 @@ var speedreader = speedreader||{};
         return (padding + word).slice (-21);
     }
 
-    namespace.createReader = function(domElement){
+    function Reader(element){
+        this.instance = $(element);
+        this.spaces = this.instance.find('.word-spacer');
+        this.spacesContent = this.spaces.text();
+        this.spacesLength = this.spacesContent.match(/\u00A0/g).length;
+    }
 
+    Reader.prototype = {
+      showWord : function(word){
+          var wordSplitLength = Math.ceil(word.length/2) + 1;
+          var sliceLength = this.spacesLength + wordSplitLength;
+          var textOutput = (this.spacesContent + word).slice(-sliceLength);
+
+          this.spaces.text(textOutput);
+          console.log(this.spacesLength + (word.length - wordSplitLength));
+          console.log(textOutput.substring(0, this.spacesLength + (word.length - wordSplitLength - 2)));
+      }
+    };
+    namespace.createReader = function(selector){
+        var reader = new Reader($(selector).get(0));
+        return reader;
     };
 }) (speedreader,jQuery);
 
-speedreader.display ('world');
+
+jQuery(function(){
+    var reader = speedreader.createReader('#reader');
+    reader.showWord('ooooooo');
+});
