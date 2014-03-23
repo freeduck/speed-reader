@@ -18,15 +18,18 @@ var speedreader = speedreader||{};
         return (padding + word).slice (-21);
     }
 
-    function Reader(element){
+    function Reader(element, wordProcessor, wordDecorator){
         this.instance = $(element);
         this.spaces = this.instance.find('.word-spacer');
         this.spacesContent = this.spaces.text();
         this.spacesLength = this.spacesContent.match(/\u00A0/g).length;
+        this.wordProcessor = wordProcessor;
+        this.wordDecorator = wordDecorator;
     }
 
     Reader.prototype = {
       showWord : function(word){
+          var spacePadding = this.wordProcessor.getSpacePadding(word, this.spacesLength);
           var wordSplitLength = Math.ceil(word.length/2) + 1;
           var sliceLength = this.spacesLength + wordSplitLength;
           var textOutput = (this.spacesContent + word).slice(-sliceLength);
@@ -37,7 +40,7 @@ var speedreader = speedreader||{};
       }
     };
     namespace.createReader = function(selector){
-        var reader = new Reader($(selector).get(0));
+        var reader = new Reader($(selector).get(0), namespace.createWordProcessor(), namespace.createWordDecorator());
         return reader;
     };
 }) (speedreader,jQuery);
