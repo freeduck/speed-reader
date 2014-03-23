@@ -20,9 +20,15 @@ var speedreader = speedreader||{};
         return new WordProcessor();
     };
 
+    namespace.service('wordProcessor', namespace.createWordProcessor());
+
     namespace.createWordDecorator = function(){
-        
+        return new WordDecorator(namespace.service('wordProcessor'));
     };
+
+    namespace.service('wordDecorator', namespace.createWordDecorator())
+
+
     namespace.highlightWord = function(word){
         var splitPos = Math.floor(word.length/2) - 1;
         var firstPart = word.substring(0,splitPos);

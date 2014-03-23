@@ -40,7 +40,7 @@ var speedreader = speedreader||{};
       }
     };
     namespace.createReader = function(selector){
-        var reader = new Reader($(selector).get(0), namespace.createWordProcessor(), namespace.createWordDecorator());
+        var reader = new Reader($(selector).get(0), namespace.service('wordProcessor'), namespace.service('wordDecorator'));
         return reader;
     };
 }) (speedreader,jQuery);
