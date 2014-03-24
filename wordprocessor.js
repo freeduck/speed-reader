@@ -9,7 +9,7 @@ var speedreader = speedreader||{};
             return Math.floor(word.length/2) - 1;
         },
         getSpacePadding: function (word, length){
-            return this.fillString("\u00A0", length - this.getOptimalRecognitionPoint(word));
+            return this.fillString("\u00A0", length - this.getOptimalRecognitionPoint(word) + 1);
         },
         fillString: function(ch, length){
             return new Array(length).join(ch);
