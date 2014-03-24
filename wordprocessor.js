@@ -22,6 +22,26 @@ var speedreader = speedreader||{};
 
     namespace.service('wordProcessor', namespace.createWordProcessor());
 
+    function WordDecorator(wordProcessor){
+        this.wordProcessor = wordProcessor;
+    }
+
+    WordDecorator.prototype = {
+        highlightWord: function(word){
+            var splitPos = Math.floor(word.length/2) - 1;
+            var firstPart = word.substring(0,splitPos);
+            var endPart = word.substring(splitPos + 1);
+            var output = firstPart
+                + '<span class="highlighted">'
+                + word.charAt(splitPos)
+                + '</span>'
+                + endPart;
+            return output;
+        }
+    };
+
+    
+
     namespace.createWordDecorator = function(){
         return new WordDecorator(namespace.service('wordProcessor'));
     };
