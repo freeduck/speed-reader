@@ -34,7 +34,7 @@ var speedreader = speedreader||{};
           var sliceLength = this.spacesLength + wordSplitLength;
           var textOutput = (this.spacesContent + word).slice(-sliceLength);
 
-          this.spaces.text(textOutput);
+          this.spaces.html(spacePadding + this.wordDecorator.highlightWord(word));
           console.log(this.spacesLength + (word.length - wordSplitLength));
           console.log(textOutput.substring(0, this.spacesLength + (word.length - wordSplitLength - 2)));
       }
