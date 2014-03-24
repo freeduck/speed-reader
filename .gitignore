@@ -16,4 +16,6 @@ npm-debug.log
 bower_components
 TAGS
 node_modules
+*\#*
+
 
