@@ -33,7 +33,7 @@ var speedreader = speedreader||{};
           this.spaces.html(spacePadding + this.wordDecorator.highlightWord(word));
       },
       displayText: function(text, callback){
-          var words = text.split(/\s+/), i, prev = new Date(), next;
+          var words = this.wordProcessor.getWords(text), i, prev = new Date(), next;
           console.log(words.length);
           var self = this;
           function nextWord(pos){
