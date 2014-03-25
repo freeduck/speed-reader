@@ -65,5 +65,3 @@ var speedreader = speedreader||{};
     }
 })(speedreader, jQuery);
 
-console.log('Wordprocessor');
-console.log(speedreader.highlightWord('hello'));

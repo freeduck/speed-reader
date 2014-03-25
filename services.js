@@ -17,8 +17,5 @@ var speedreader = speedreader||{};
     namespace.service = Service;
 })(speedreader, jQuery);
 
-speedreader.service('wordProcessor', function(){
-    console.log('Hest');
-});
 
 
