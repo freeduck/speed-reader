@@ -13,6 +13,9 @@ var speedreader = speedreader||{};
         },
         fillString: function(ch, length){
             return new Array(length).join(ch);
+        },
+        getWords: function(text){
+            return text.split(/\s+/);
         }
     };
 
@@ -62,5 +65,3 @@ var speedreader = speedreader||{};
     }
 })(speedreader, jQuery);
 
-console.log('Wordprocessor');
-console.log(speedreader.highlightWord('hello'));
