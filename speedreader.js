@@ -30,13 +30,22 @@ var speedreader = speedreader||{};
     Reader.prototype = {
       showWord : function(word){
           var spacePadding = this.wordProcessor.getSpacePadding(word, this.spacesLength);
-          var wordSplitLength = Math.ceil(word.length/2) + 1;
-          var sliceLength = this.spacesLength + wordSplitLength;
-          var textOutput = (this.spacesContent + word).slice(-sliceLength);
-
           this.spaces.html(spacePadding + this.wordDecorator.highlightWord(word));
-          console.log(this.spacesLength + (word.length - wordSplitLength));
-          console.log(textOutput.substring(0, this.spacesLength + (word.length - wordSplitLength - 2)));
+      },
+      displayText: function(text, callback){
+          var words = text.split(/\s+/), i, prev = new Date(), next;
+          console.log(words.length);
+          var self = this;
+          function nextWord(pos){
+              next = new Date
+              if(pos === words.length){
+                  callback(null);
+                  return;
+              }
+              self.showWord(words[pos]);
+              setTimeout(nextWord.bind(null, pos + 1), self.wordPerMinuteRatio);
+          }
+          nextWord(0);
       }
     };
     namespace.createReader = function(selector){
@@ -45,8 +54,19 @@ var speedreader = speedreader||{};
     };
 }) (speedreader,jQuery);
 
-
 jQuery(function(){
-    var reader = speedreader.createReader('#reader');
-    reader.showWord('ooooooo');
+    var reader = speedreader.createReader('#reader'), start;
+    reader.wordPerMinuteRatio = 60/400*1000;
+    var text = jQuery('#dummy-text').text();
+    start = new Date();
+    reader.displayText(text, function(err){
+        if(err && typeof console !== 'undefined'){
+            console.log(err);
+            return;
+        }
+        var end = new Date();
+        var time = new Date();
+        console.log((end-start)/1000/60);
+        console.log(end-start);
+    });
 });
